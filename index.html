@@ -9,7 +9,11 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="./assets/css/style.css">
-
+  <script>
+      window.onload = function() {
+        var context = new AudioContext();
+      }
+  </script>
 </head>
 
 <body class="container">
@@ -43,6 +47,9 @@
   <audio id="liam-sound" src="./assets/sounds/Single Cow-SoundBible.com-2051754137.mp3"></audio>
   <audio id="kuratas-sound" src="./assets/sounds/Large Industrial Robot-SoundBible.com-1509415522.mp3"></audio>
   <audio id="mk-gndm-sound" src="./assets/sounds/Laser Blasts-SoundBible.com-108608437.mp3"></audio>
+  <audio id="music" autoplay>
+    <source src="./assets/sounds/Einojuhani_Rautavaara_-_Piano_Concerto_No__1__1969_.mp3" type="audio/mp3">
+  </audio>
 </body>
 
 </html>
