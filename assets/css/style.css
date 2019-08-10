@@ -1,4 +1,9 @@
+html {
+  height: 100%;
+}
+
 body {
+  height: 100%;
   background-image: url("../images/y1uvCmT.jpg");
   background-size: 100%;
   text-align: center;
@@ -6,7 +11,7 @@ body {
 }
 
 p {
-  margin-bottom: 5px;
+  margin-bottom: 0px;
   font-size: 20px;
 }
 
@@ -53,10 +58,31 @@ p {
   animation-timing-function: steps(3,end);
 }
 
-.img-thumbnail:hover {
+.img-hover {
+  color: black;
+}
+
+.img-hover:hover {
   background: #a02828;
   color: white;
   margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+.fadeout {
+  animation-name: fadeout;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  animation-duration: 1s;
+  opacity: 0;
+}
+
+.fadein {
+  animation-name: fadein;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  animation-duration: 0.5s;
+  opacity: 1;
 }
 
 @keyframes grey-flash {
@@ -86,5 +112,25 @@ p {
 
   to {
     text-shadow: 2px 2px 30px red;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
   }
 }

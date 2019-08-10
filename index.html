@@ -18,27 +18,31 @@
 
 <body class="container">
   <div class="row heading">
-    <h1 class="jumbotron col-sm-12 title">COWS VERSUS MECHS</h1>
+    <h1 class="jumbotron col-sm-12 title">CATTLE VS MECHS</h1>
   </div>
   <div class="row">
     <h2 class="col-sm-12 char-prompt">Choose your character:</h2>
   </div>
   <div class="row fighter-holder">
-    <div class="img-thumbnail col-xs-3" id="martha">
+    <div class="img-thumbnail img-hover col-xs-3" id="martha">
       <p>Martha</p>
       <img class="img-fluid fighter" src="http://www.wiseacre-gardens.com/cows/cow-black-patch.jpg" alt="Martha">
+      <p id="martha-hp">140</p>
     </div>
-    <div class="img-thumbnail col-xs-3" id="liam">
+    <div class="img-thumbnail img-hover col-xs-3" id="liam">
       <p>Liam</p>
       <img class="img-fluid fighter" src="https://fwi-wp-assets-live.s3-eu-west-1.amazonaws.com/sites/1/2018/02/140218-highland-cow-c-tim-scrivener.jpg" alt="Liam">
+      <p id="liam-hp">100</p>
     </div>
-    <div class="img-thumbnail col-xs-3" id="kuratas">
+    <div class="img-thumbnail img-hover col-xs-3" id="kuratas">
       <p>Kuratas</p>
       <img class="img-fluid fighter" src="https://cdn.vox-cdn.com/thumbor/jbafvMuk14Rx7vkdSMIlAM_W-cg=/0x0:1100x731/1320x743/filters:focal(462x277:638x453):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/61436445/theverge10_2040.1419979048.0.jpg" alt="Kuratas">
+      <p id="kuratas-hp">200</p>
     </div>
-    <div class="img-thumbnail col-xs-3" id="mk-gndm">
+    <div class="img-thumbnail img-hover col-xs-3" id="mkgndm">
       <p>MK-GNDM</p>
       <img class="img-fluid fighter" src="https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fblogs-images.forbes.com%2Flaurenorsini%2Ffiles%2F2018%2F04%2Funicorn-top.jpg" alt="MK-GNDM">
+      <p id="mkgndm-hp">120</p>
     </div>
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -46,7 +50,7 @@
   <audio id="martha-sound" src="./assets/sounds/Cow And Bell-SoundBible.com-1243222141.mp3"></audio>
   <audio id="liam-sound" src="./assets/sounds/Single Cow-SoundBible.com-2051754137.mp3"></audio>
   <audio id="kuratas-sound" src="./assets/sounds/Large Industrial Robot-SoundBible.com-1509415522.mp3"></audio>
-  <audio id="mk-gndm-sound" src="./assets/sounds/Laser Blasts-SoundBible.com-108608437.mp3"></audio>
+  <audio id="mkgndm-sound" src="./assets/sounds/Laser Blasts-SoundBible.com-108608437.mp3"></audio>
   <audio id="music" autoplay>
     <source src="./assets/sounds/Einojuhani_Rautavaara_-_Piano_Concerto_No__1__1969_.mp3" type="audio/mp3">
   </audio>
