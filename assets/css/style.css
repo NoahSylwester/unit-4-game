@@ -85,6 +85,10 @@ p {
   opacity: 1;
 }
 
+.no-display {
+  display: none;
+}
+
 @keyframes grey-flash {
   from {
     text-shadow: 0;

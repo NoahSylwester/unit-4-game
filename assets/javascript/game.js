@@ -32,8 +32,9 @@ gameStart = function(characterChoice) {
       $('.title').css("display", "none");
       $('.char-prompt').css("display", "none");
       $('body').css({"display":"flex", "align-items":"center", "justify-content":"center"});
+      $('.img-thumbnail').addClass('no-display');
+      player.removeClass('no-display');
       player.addClass('fadein');
-      player.insertAfter('<p>My god. I need to finish this.</p>');
 
     }, 3000);
 
