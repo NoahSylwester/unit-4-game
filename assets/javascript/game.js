@@ -63,7 +63,7 @@ function Character(name, hp, atk, cntrAtk, dialogue) { // define character const
 }
 
 var martha = new Character("martha", 160, 6, 10, dialogue.martha); // constructing all characters
-var liam = new Character("liam", 110, 10, 16, dialogue.liam);
+var liam = new Character("liam", 110, 11, 16, dialogue.liam);
 var kuratas = new Character("kuratas", 200, 4, 8, dialogue.kuratas);
 var mkgndm = new Character("mkgndm", 120, 8, 20, dialogue.mkgndm);
 
