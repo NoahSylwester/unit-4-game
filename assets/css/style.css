@@ -24,6 +24,10 @@ p {
   height: 100%;
 }
 
+#battle-screen {
+  height: 100%;
+}
+
 #player-zone {
   display: flex;
   justify-content: left;
@@ -33,6 +37,25 @@ p {
 #enemy-zone {
   display: flex;
   justify-content: center;
+}
+
+#battle-text {
+  font-family: 'IBM Plex Sans', sans-serif;
+  padding: 20px;
+  color: rgb(204, 204, 204);
+  height: 300px;
+  width: 100%;
+  background-color: rgba(143, 0, 0, 0.274);
+  text-align: left;
+  word-wrap: normal;
+}
+
+.row {
+  width: 100%;
+}
+
+.row-adjust {
+  margin-left: 5px;
 }
 
 .title {
@@ -87,6 +110,23 @@ p {
   background-color: rgba(143, 0, 0, 0.274);
   text-align: left;
   word-wrap: normal;
+}
+
+.battle-zone {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.battle-window {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.battle-top {
+  margin-top: 40%;
+  width: 100%;
 }
 
 .img-hover {
