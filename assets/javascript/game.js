@@ -16,7 +16,7 @@ var dialogue = { // dialogue options for characters
     "I can never stop until they are all destroyed. God, give me the strength to see it through.",
     "Finally, it is over. Mooooooooooo!",
     "A robot. I'll never let you past me, damned machine.",
-    "L-l-liam, my love. They p-p-put something in my b-brain. I'm already gone. Please end me. BZZZZZZZZZZTTTTT. KILL."
+    "L-L-Liam, my love. They p-p-put something in my b-brain. I'm already gone. Please end me. BZZZZZZZZZZTTTTT. KILL."
   ],
   liam: [
     "I'm ready. God help us.",
@@ -36,10 +36,10 @@ var dialogue = { // dialogue options for characters
   ],
   mkgndm: [
     "I MUST WIN. THESE CATTLE CANNOT DEFEAT ME.",
-    "VICTORY CAN BRING JOY, BUT ONLY ANNIHILTION WILL BRING AN END.",
+    "VICTORY CAN BRING JOY, BUT ONLY ANNIHILATION WILL BRING AN END.",
     "THE LAND RUNS RED WITH BLOOD AND OIL. THE WEAK FIND SUCCOR IN PEACE, WHILE THE STRONG REVEL IN DOMINATION.",
     "DEATH AND GLORY ARE ALL THAT HOLD MEANING. I MUST FIND MORE... MORE!",
-    "YOU CANNOT HOLD TO STAND AGAINST ME. DIE.",
+    "YOU CANNOT HOPE TO STAND AGAINST ME. DIE.",
     "KURATAS. HAVE YOU BETRAYED US?"
   ]
 }
@@ -62,9 +62,9 @@ function Character(name, hp, atk, cntrAtk, dialogue) { // define character const
   }
 }
 
-var martha = new Character("martha", 140, 3, 10, dialogue.martha); // constructing all characters
-var liam = new Character("liam", 100, 7, 16, dialogue.liam);
-var kuratas = new Character("kuratas", 200, 3, 8, dialogue.kuratas);
+var martha = new Character("martha", 160, 6, 10, dialogue.martha); // constructing all characters
+var liam = new Character("liam", 110, 10, 16, dialogue.liam);
+var kuratas = new Character("kuratas", 200, 4, 8, dialogue.kuratas);
 var mkgndm = new Character("mkgndm", 120, 8, 20, dialogue.mkgndm);
 
 function gameStart(characterChoice, characterObject) { // begins game process after character selection
