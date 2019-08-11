@@ -1,8 +1,11 @@
 var gameRunning = false; // used to stop gameStart() from restarting
 var battleRunning = false;
 var charArr = [$('#martha'),$('#liam'),$('#kuratas'),$('#mkgndm')];
-var currentEnemy;
-var player;
+var player; // these variables will store which character is selected, and its object
+var playerObject;
+var currentEnemy; // these do the same for the current enemy
+var currentEnemyObject;
+var isRival= false;
 
 var dialogue = { // dialogue options for characters
   martha: [
@@ -18,6 +21,7 @@ var dialogue = { // dialogue options for characters
     "I need to stay strong. Time to charge ahead.",
     "...my vision's getting darker. But I can't rest. For my family, I lay down my life.",
     "...and so finally I can rest. Father...",
+    "Cursed automaton. I cannot let you past here.",
     "My sweet Martha. They are c-c-BZZZZT-c-controlling my mind. Kill me, bef-BZZZZT-ore I h-h-h-hurt you."
   ],
   kuratas: [
@@ -59,9 +63,10 @@ var liam = new Character("liam", 100, 8, 8, dialogue.liam);
 var kuratas = new Character("kuratas", 200, 4, 4, dialogue.kuratas);
 var mkgndm = new Character("mkgndm", 120, 10, 10, dialogue.mkgndm);
 
-function gameStart(characterChoice) { // begins game process after character selection
+function gameStart(characterChoice, characterObject) { // begins game process after character selection
   if (gameRunning === false) {
     player = characterChoice; // sets chosen character to player and all others to enemy
+    playerObject = characterObject;
     var enemies = charArr.filter((enemy) => { // sets enemy array as all non-players
       return (enemy.attr('id') !== player.attr('id'));
     });
@@ -87,7 +92,7 @@ function gameStart(characterChoice) { // begins game process after character sel
         enemy.removeClass('no-display');
         enemy.addClass('fadein'); 
        });
-      $('.select-text').text(martha.dialogue[0]);
+      $('.select-text').text(playerObject.dialogue[0]);
       $('.select-text').addClass('fadein');
       $('.select-top').addClass('fadein');
 
@@ -97,9 +102,11 @@ function gameStart(characterChoice) { // begins game process after character sel
   gameRunning = true;
 };
 
-function battleStart(enemyChoice) {
+function battleStart(enemyChoice, enemyObject) {
   battleRunning = true;
   currentEnemy = enemyChoice;
+  currentEnemyObject = enemyObject;
+  
   $('#enemy-select').addClass('fadeout');
   setTimeout(() => {
   
@@ -107,6 +114,10 @@ function battleStart(enemyChoice) {
     $('#battle-screen').removeClass('no-display').addClass('fadein');
     $('#player-battle-zone').append(player);
     $('#enemy-battle-zone').append(currentEnemy);
+    if (playerObject === martha && currentEnemyObject === liam || playerObject === liam && currentEnemyObject === martha || playerObject === kuratas && currentEnemyObject === mkgndm || playerObject === mkgndm && currentEnemyObject === kuratas) { // checks for special dialogue condition
+      $('#battle-text').text(currentEnemyObject.dialogue[5]);
+    }
+    else {$('#battle-text').text(currentEnemyObject.dialogue[4]);};
 
   }, 2000);
 }
@@ -118,33 +129,33 @@ $('document').ready(function(){
   $('#martha').on("click",function() {
     document.getElementById("martha-sound").play();
     document.getElementById("music").play();
-    gameStart($('#martha'));
+    gameStart($('#martha'), martha);
     if (gameRunning === true && player.attr('id') !== "martha" && battleRunning === false) {
-      battleStart($('#martha'));
+      battleStart($('#martha'), martha);
     }
   });
   $('#liam').on("click",function() {
     document.getElementById("liam-sound").play();
     document.getElementById("music").play();
-    gameStart($('#liam'));
+    gameStart($('#liam'), liam);
     if (gameRunning === true && player.attr('id') !== "liam" && battleRunning === false) {
-      battleStart($('#liam'));
+      battleStart($('#liam'), liam);
     }
   });
   $('#kuratas').on("click",function() {
     document.getElementById("kuratas-sound").play();
     document.getElementById("music").play();
-    gameStart($('#kuratas'));
+    gameStart($('#kuratas'), kuratas);
     if (gameRunning === true && player.attr('id') !== "kuratas" && battleRunning === false) {
-      battleStart($('#kuratas'));
+      battleStart($('#kuratas'), kuratas);
     }
   });
   $('#mkgndm').on("click",function() {
     document.getElementById("mkgndm-sound").play();
     document.getElementById("music").play();
-    gameStart($('#mkgndm'));
+    gameStart($('#mkgndm'), mkgndm);
     if (gameRunning === true && player.attr('id') !== "mkgndm" && battleRunning === false) {
-      battleStart($('#mkgndm'));
+      battleStart($('#mkgndm'), mkgndm);
     }
   });
 
