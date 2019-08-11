@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>RPG game</title>
   <link rel="stylesheet" href="./assets/css/reset.css">
-  <link href="https://fonts.googleapis.com/css?family=Saira+Stencil+One&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans|Saira+Stencil+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="./assets/css/style.css">
@@ -19,7 +19,7 @@
 <body class="container">
   <section id="title-screen" class="row container">
     <div class="row heading">
-      <h1 class="jumbotron col-sm-12 title">CATTLE VS MECHS</h1>
+      <h1 class="jumbotron col-sm-12 title throb">CATTLE VS MECHS</h1>
     </div>
     <div class="row">
       <h2 class="col-sm-12 char-prompt">Choose your character:</h2>
@@ -47,12 +47,26 @@
       </div>
     </div>
   </section>
-  <section id="enemy-select" class="row container no-display">
-    <div>
-
-    </div>
+  <section id="enemy-select" class="row no-display">
+      <div class="col-6 container select-screen">
+        <div class='row select-top'>
+          <div class='col-5' id="player-zone"></div>
+          <p class='col-7 select-text'></p>
+        </div>
+      </div>
+      <div class="col-6 container select-screen">
+        <div class="row select-top">
+          <h1 class='col-12 throb'>
+            Enemies
+          </h1>
+        </div>
+        <div class='row'>
+          <div class='col-12' id="enemy-zone">
+          </div>
+        </div>
+      </div>
   </section>
-  <section id="battle-screen" class="row container no-display">
+  <section id="battle-screen" class="row no-display">
     <div>
 
     </div>
