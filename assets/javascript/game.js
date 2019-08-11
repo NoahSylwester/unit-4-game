@@ -3,9 +3,11 @@ var battleRunning = false;
 var charArr = [$('#martha'),$('#liam'),$('#kuratas'),$('#mkgndm')];
 var player; // these variables will store which character is selected, and its object
 var playerObject;
+var enemies;
 var currentEnemy; // these do the same for the current enemy
 var currentEnemyObject;
 var isRival= false;
+var wins = 0;
 
 var dialogue = { // dialogue options for characters
   martha: [
@@ -48,9 +50,11 @@ function Character(name, hp, atk, cntrAtk, dialogue) { // define character const
   this.atk = atk;
   this.cntrAtk = cntrAtk;
   this.dialogue = dialogue;
+  this.atkIncrement = atk;
 
   this.attack = function(enemy) { // player attack
     enemy.hp -= this.atk;
+    this.atk += this.atkIncrement;
   };
 
   this.counterAttack = function(player) { // computer attack
@@ -58,16 +62,16 @@ function Character(name, hp, atk, cntrAtk, dialogue) { // define character const
   }
 }
 
-var martha = new Character("martha", 140, 5, 5, dialogue.martha); // constructing all characters
-var liam = new Character("liam", 100, 8, 8, dialogue.liam);
-var kuratas = new Character("kuratas", 200, 4, 4, dialogue.kuratas);
-var mkgndm = new Character("mkgndm", 120, 10, 10, dialogue.mkgndm);
+var martha = new Character("martha", 140, 3, 10, dialogue.martha); // constructing all characters
+var liam = new Character("liam", 100, 7, 16, dialogue.liam);
+var kuratas = new Character("kuratas", 200, 3, 8, dialogue.kuratas);
+var mkgndm = new Character("mkgndm", 120, 8, 20, dialogue.mkgndm);
 
 function gameStart(characterChoice, characterObject) { // begins game process after character selection
   if (gameRunning === false) {
     player = characterChoice; // sets chosen character to player and all others to enemy
     playerObject = characterObject;
-    var enemies = charArr.filter((enemy) => { // sets enemy array as all non-players
+    enemies = charArr.filter((enemy) => { // sets enemy array as all non-players
       return (enemy.attr('id') !== player.attr('id'));
     });
   
@@ -107,14 +111,16 @@ function battleStart(enemyChoice, enemyObject) {
   currentEnemy = enemyChoice;
   currentEnemyObject = enemyObject;
   
-  $('#enemy-select').addClass('fadeout');
+  $('#enemy-select').removeClass('fadein').addClass('fadeout');
   setTimeout(() => {
   
+    $('#atk-button').removeClass('no-display');
     $('#enemy-select').addClass('no-display');
     $('#battle-screen').removeClass('no-display').addClass('fadein');
     $('#player-battle-zone').append(player);
     $('#enemy-battle-zone').append(currentEnemy);
-    if (playerObject === martha && currentEnemyObject === liam || playerObject === liam && currentEnemyObject === martha || playerObject === kuratas && currentEnemyObject === mkgndm || playerObject === mkgndm && currentEnemyObject === kuratas) { // checks for special dialogue condition
+    // checks for special dialogue conditions
+    if (playerObject === martha && currentEnemyObject === liam || playerObject === liam && currentEnemyObject === martha || playerObject === kuratas && currentEnemyObject === mkgndm || playerObject === mkgndm && currentEnemyObject === kuratas) {
       $('#battle-text').text(currentEnemyObject.dialogue[5]);
     }
     else {$('#battle-text').text(currentEnemyObject.dialogue[4]);};
@@ -122,9 +128,60 @@ function battleStart(enemyChoice, enemyObject) {
   }, 2000);
 }
 
+function selectionStart(defeatedEnemy) { // return to selection screen after battle win
+  $('#battle-screen').removeClass('fadein').addClass('fadeout');
+  enemies = enemies.filter((enemy) => { // sets enemy array as all non-players
+    return (enemy.attr('id') !== defeatedEnemy.attr('id')); // remove defeated enemy from enemies list
+  });
+  $('#enemy-zone').append(...enemies);
+  console.log(wins);
+  $('.select-text').text(playerObject.dialogue[wins]);
+  setTimeout(() => {
+
+    currentEnemy.addClass('no-display');
+    $('#player-zone').append(player);
+    $('#battle-screen').addClass('no-display');
+    $('#enemy-select').removeClass('no-display fadein').addClass('fadein');
+
+  }, 2000);
+  battleRunning = false;
+}
+
+function gameOver() {
+  $('#title-screen').removeClass('fadein').addClass('fadeout');
+  $('#enemy-select').removeClass('fadein').addClass('fadeout');
+  $('#battle-screen').removeClass('fadein').addClass('fadeout');
+  setTimeout(() => {
+    $('#title-screen').addClass('no-display');
+    $('#enemy-select').addClass('no-display');
+    $('#battle-screen').addClass('no-display');
+    $('body').css({'padding':'100px'});
+    $('#game-over').addClass('fadein').removeClass('no-display');
+  }, 3000);
+}
+
+function winGame() { // win game
+  setTimeout( () => {
+    $('#title-screen').removeClass('fadein').addClass('fadeout');
+    $('#enemy-select').removeClass('fadein').addClass('fadeout');
+    $('#battle-screen').removeClass('fadein').addClass('fadeout');
+    setTimeout(() => {
+      $('#title-screen').addClass('no-display');
+      $('#enemy-select').addClass('no-display');
+      $('#battle-screen').addClass('no-display');
+      $('body').css({'padding':'100px'});
+      $('#game-over').text('YOU WIN!').addClass('fadein').removeClass('no-display');
+    }, 3000);
+  }, 5000);
+}
+
 
 $('document').ready(function(){
 
+  $('#martha-hp').text(martha.hp);
+  $('#liam-hp').text(liam.hp);
+  $('#kuratas-hp').text(kuratas.hp);
+  $('#mkgndm-hp').text(mkgndm.hp);
   
   $('#martha').on("click",function() {
     document.getElementById("martha-sound").play();
@@ -159,4 +216,39 @@ $('document').ready(function(){
     }
   });
 
+  $('#atk-button').on("click", function() { // when attack button is clicked
+    playerObject.attack(currentEnemyObject); // execute attacks, change hp
+    currentEnemyObject.counterAttack(playerObject);
+    $('#battle-text').text(`You attacked for ${playerObject.atk} damage. The enemy counter-attacked for ${currentEnemyObject.cntrAtk} damage.`)
+    $('#martha-hp').text(martha.hp); // update hp displays
+    $('#liam-hp').text(liam.hp);
+    $('#kuratas-hp').text(kuratas.hp);
+    $('#mkgndm-hp').text(mkgndm.hp);
+    if (playerObject.hp <= 0) {
+      playerObject.hp = 0;
+      $('#martha-hp').text(martha.hp); // update hp displays
+      $('#liam-hp').text(liam.hp);
+      $('#kuratas-hp').text(kuratas.hp);
+      $('#mkgndm-hp').text(mkgndm.hp);
+      // gameover
+      gameOver();
+    }
+    else if (currentEnemyObject.hp <= 0) {
+      $('#atk-button').addClass('no-display');
+      currentEnemyObject.hp = 0;
+      $('#martha-hp').text(martha.hp); // update hp displays
+      $('#liam-hp').text(liam.hp);
+      $('#kuratas-hp').text(kuratas.hp);
+      $('#mkgndm-hp').text(mkgndm.hp);
+      // win
+      wins ++;
+      if (wins === 3) {
+        // win game
+        $('.win').text(''); // go back to the selection screen for one final dialogue
+        selectionStart(currentEnemy);
+        winGame();
+      }
+      selectionStart(currentEnemy);
+    }
+  });
 });
